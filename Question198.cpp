@@ -15,9 +15,3 @@ public:
         return cur;
     }
 };
-
-int main() {
-    vector<int> value { 2, 1, 1, 2 };
-    Solution solution;
-    solution.rob(value);
-}
