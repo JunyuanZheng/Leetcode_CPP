@@ -8,11 +8,8 @@ public:
         int result = 0;
         int l = 0, h = (int) height.size() - 1;
         while (l < h) {
-            result = max(result, (min(height[l], height[h]) * (h - l)));
-            if (height[l] < height[h])
-                l++;
-            else
-                h--;
+            result = max(result, min(height[l], height[h]) * (h - l));
+            height[l] <= height[h] ? l++ : h--;
         }
         return result;
     }
