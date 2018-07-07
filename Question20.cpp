@@ -8,23 +8,17 @@ class Solution {
 public:
     bool isValid(string s) {
         stack<char> memo;
-        for (auto pointer = s.cbegin(); pointer != s.cend(); pointer += 1) {
-            if (*pointer == ']' || *pointer == ')' || *pointer == '}') {
-                if (memo.empty() || memo.top() != *pointer)
-                    return false;
-                memo.pop();
+        for (char c : s) {
+            if (c == '{') {
+                memo.push('}');
+            } else if (c == '[') {
+                memo.push(']');
+            } else if (c == '(') {
+                memo.push(')');
+            } else if (memo.empty() || memo.top() != c) {
+                return false;
             } else {
-                switch (*pointer) {
-                    case '[':
-                        memo.push(']');
-                        break;
-                    case '(':
-                        memo.push(')');
-                        break;
-                    case '{':
-                        memo.push('}');
-                        break;
-                }
+                memo.pop();
             }
         }
         return memo.empty();
