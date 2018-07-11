@@ -8,7 +8,7 @@ struct ListNode {
 class Solution {
 private:
     ListNode * reverse(ListNode * head) {
-        if (head == nullptr || head -> next == nullptr)
+        if (head == nullptr || head->next == nullptr)
             return head;
         ListNode * tmp = reverse(head -> next);
         head -> next -> next = head;
@@ -17,11 +17,10 @@ private:
     }
 public:
     bool isPalindrome(ListNode *head) {
-        ListNode * slow = head;
-        ListNode * fast = head;
+        ListNode * slow = head, * fast = head;
         while (fast != nullptr && fast -> next != nullptr) {
-            fast = fast -> next -> next;
             slow = slow -> next;
+            fast = fast -> next -> next;
         }
 
         if (fast != nullptr)
@@ -30,8 +29,8 @@ public:
         slow = reverse(slow);
         fast = head;
 
-        while (fast != nullptr && slow != nullptr) {
-            if (fast -> val != slow -> val)
+        while (slow != nullptr) {
+            if (slow->val != fast->val)
                 return false;
             fast = fast -> next;
             slow = slow -> next;
@@ -40,17 +39,3 @@ public:
         return true;
     }
 };
-
-int main() {
-    ListNode* l1 = new ListNode(1);
-    ListNode* l2 = new ListNode(2);
-    ListNode* l3 = new ListNode(2);
-    ListNode* l4 = new ListNode(1);
-
-    l1 -> next = l2;
-    l2 -> next = l3;
-    l3 -> next = l4;
-
-    Solution solution;
-    solution.isPalindrome(l1);
-}
