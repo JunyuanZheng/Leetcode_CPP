@@ -6,31 +6,28 @@ using namespace std;
 class Solution {
 public:
     int myAtoi(string str) {
-        int result = 0;
         bool sign = true;
+        int result = 0;
+        int idx = 0;
 
-        auto pointer = str.cbegin();
+        while (idx < (int) str.length() && str[idx] == ' ')
+            idx += 1;
 
-        while (*pointer == ' ')
-            pointer += 1;
-
-        if (*pointer == '-' || *pointer == '+') {
-            sign = *pointer != '-';
-            pointer += 1;
+        if (str[idx] == '-' || str[idx] == '+') {
+            sign = str[idx] != '-';
+            idx += 1;
         }
 
-        if (*pointer < '0' || *pointer > '9')
+        if (str[idx] < '0' || str[idx] > '9')
             return 0;
 
-        while (pointer != str.cend()) {
-            if (*pointer < '0' || *pointer > '9')
-                break;
-            result = result * 10 + *pointer - '0';
-            if (result % 10 != *pointer - '0') {
+        while (idx < (int) str.length() && str[idx] >= '0' && str[idx] <= '9') {
+            result = result * 10 + (str[idx] - '0');
+            if (result % 10 != (str[idx] - '0') % 10) {
                 result = sign ? INT_MAX : INT_MIN;
                 break;
             }
-            pointer += 1;
+            idx += 1;
         }
 
         return sign ? result : -result;
