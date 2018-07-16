@@ -1,10 +1,12 @@
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
 class Solution {
+/*
 private:
-    void reverse(vector<int> & nums, int start, int end) {
+    void reverse(vector<int> &nums, int start, int end) {
         if (start < 0 || end > (int) nums.size() - 1)
             return;
         while (start < end) {
@@ -15,11 +17,13 @@ private:
             end -= 1;
         }
     }
+*/
+
 public:
-    void rotate(vector<int>& nums, int k) {
+    void rotate(vector<int> &nums, int k) {
         k = k % (int) nums.size();
-        reverse(nums, 0, (int) nums.size() - 1);
-        reverse(nums, 0, k - 1);
-        reverse(nums, k, (int) nums.size() - 1);
+        reverse(nums.begin(), nums.end());
+        reverse(nums.begin(), nums.begin() + k);
+        reverse(nums.begin() + k, nums.end());
     }
 };
